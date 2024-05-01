@@ -1,0 +1,1 @@
+create database pwd2024 character set = 'utf8mb4' collate= 'utf8mb4_general_ci';
