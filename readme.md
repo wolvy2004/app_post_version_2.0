@@ -1,7 +1,7 @@
 # TRABAJO PRACTICO N° 5 📮
 Vamos a comenzar a crear nuestra aplicacion de posteos , para lo cual necesitamos crear nuestros modelos, DAOs y controladores.
 requerimos tener dos modelos: Post y Comment
-## ANTES DE PONER MANOS A LA OBRA :construction_worker: 
+## ANTES DE PONER MANOS A LA OBRA 
 Correr los comandos :
 ```
 composer install
@@ -10,10 +10,12 @@ composer run migrate
 Nuestro namespace es ahora **App//**
 >recordar usarlo a la hora de crear todas las clases necesarias y al usarlas (***use***)
 
-Abrir la terminal y copiar : ``mysql -uroot -p`` suponiendo que root sea un usuario valido, les va a pedir un password sino tiene presionen enter 
-Copiar y correr el script dbsql.sql, esto les va a crear la base de datos pwd2024
-renombrar el archivo ``.env-distr`` por ``.env`` y completar los datos con los propios de la base de datos
+1. Abrir la terminal y copiar : ``mysql -uroot -p`` suponiendo que root sea un usuario válido, les va a pedir un password sino tiene presionen ``enter``.
+2. Copiar y correr el script dbsql.sql, esto les va a crear la base de datos pwd2024
+3. Renombrar el archivo ``.env-distr`` por ``.env`` y completar los datos con los propios de la base de datos
 
+## A trabajar :construction_worker: 
+Vamos a crear nuestros Modelos...
 ## MODELOS :file_folder:
 
 >Todos los modelos deben extender de **ModelBase**
@@ -122,18 +124,20 @@ Tienen en común los métodos
    modifica y actualiza un registro
    - ``**findOne(string|int $id): ?array**``
    Encuentra un registro especificado por el id, que puede ser un cadena o un entero
-  
+## Consideraciones Importantes :warning:
  ### Sobre las clases Controladores
-los controladores deben serializar los objetos que reciben, en el caso del update primero deben modificar el objeto de acuerdo a los parametros que recibe por ejemplo:
+Los controladores deben serializar los objetos que reciben, en el caso del update primero deben modificar el objeto de acuerdo a los parametros que recibe por ejemplo:
 en el **Post** podemos modificar 
 - el post (mensaje)
 - los likes (+/-)
 - los dislikes(+/-)
 - picture (imagen)
 pero no podremos modificar nada más, el usuario y el id no pueden ser cambiados
-en **Comment** modificaremos:
+
+En **Comment** modificaremos solo:
 - comentario (mensaje)
-recuerden crear los métodos (en los modelos) para cada uno de estas modificaciones (los infames setters)
+
+Recuerden crear los métodos (en los modelos) para cada uno de estas modificaciones (los infames setters)
 Tener precaucion en los setters de likes y dislike deben sumar o restar y no cambiar el valor unicamente 
 ### Sobre las clases Modelos
 Recuerden nombrar correctamente a los atributos tal como se piden en el apartado de creación de modelos.
@@ -151,7 +155,7 @@ return DBConect::read(sql:$sql, params:$params);
 - Llamamos al método estatico **read** de la clase **DBConect**
 - Retornamos nuestro resultado en una variable, el retorno en este ejemplo es un array de un elemento (**indice 0**), para acceder al mismo debemos anteponer el [0]
 
- ### Metodologia para aprobar el Trabajo Práctico
+ ## Metodología para aprobar el Trabajo Práctico :trophy:
   Para poder aprobar este trabajo práctico deben correr los test mediante el script `composer run test`  o desde el icono del bichito con el play de vsc (php debug)
   ### Conceptos que vemos en este TP
   * Capas de Modelo y de Controlador del patrón MVC
