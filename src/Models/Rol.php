@@ -9,11 +9,12 @@ use App\Models\ModelBase as Model;
 
 class Rol extends Model
 {
+    public  $descripcion;
     public function __construct(
-        ?int $id,
-        string $created_at,
-        string $updated_at,
-        public string $descripcion,
+        string $descripcion,
+        int $id = 0,
+        string $created_at = "now",
+        string $updated_at = "",
         int $is_active = 1
     ) {
         $this->descripcion = $descripcion;
@@ -43,5 +44,9 @@ class Rol extends Model
     public function setDescripcion(string $new_descripcion): void
     {
         $this->descripcion = $new_descripcion;
+    }
+    public function getDescripcion(): string
+    {
+        return $this->descripcion;
     }
 }

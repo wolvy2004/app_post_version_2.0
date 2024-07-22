@@ -19,19 +19,19 @@ final class UserTest extends TestCase
         return [
             [
                 new User(
-                    id: 0,
                     username: "eguerra",
                     password: "1234",
-                    created_at: "now",
-                    updated_at: "",
-                    is_active: 1,
                     email: "eguerra@gmail.com",
+                    id: 1,
+                    created_at: 'now',
+                    updated_at: '',
+                    is_active: 1,
                     rol: new Rol(
                         descripcion: "admin",
-                        id: 0,
-                        created_at: "now",
-                        updated_at: "",
-                        is_active: 1
+                        id: 1,
+                        created_at: 'now',
+                        updated_at: '',
+                        is_active: 1,
                     )
                 )
 

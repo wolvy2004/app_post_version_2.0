@@ -55,10 +55,12 @@ class PostControllerTest extends TestCase
         $NuevoPost = $nuevo_post->serializar();
         $result = PostController::create($NuevoPost);
         $this->assertEquals(1, $result);
+
         $id = $this->lastItem();
+
         $find_post = PostController::findOne($id);
 
-        $this->assertEquals($NuevoPost['post'], $find_post[0]['post']);
+        $this->assertEquals($NuevoPost['post'], $find_post['post']);
     }
 
     #[DataProvider('PostProvider')]
@@ -72,7 +74,7 @@ class PostControllerTest extends TestCase
         $result = PostController::update($post_a_modificar);
         $this->assertEquals(1, $result);
         $find_post = PostController::findOne($id);
-        $this->assertEquals($post_a_modificar['post'], $find_post[0]['post']);
+        $this->assertEquals($post_a_modificar['post'], $find_post['post']);
     }
     public function testListarPosts(): void
     {
@@ -85,7 +87,7 @@ class PostControllerTest extends TestCase
         $id = $this->lastItem();
         $post = PostController::findOne(id: $id);
         $this->assertIsArray($post);
-        $this->assertEquals(1, count($post));
+        $this->assertEquals(9, count($post));
     }
     public function testDeletePost()
     {
@@ -98,8 +100,8 @@ class PostControllerTest extends TestCase
 
     public function lastItem(): int
     {
-        $sql = 'SELECT MAX(id) id from Posts';
+        $sql = 'SELECT MAX(id) id from posts';
         $max = DBConect::read($sql);
-        return $max[0]['id'];
+        return $max['id'];
     }
 }

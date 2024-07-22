@@ -9,7 +9,7 @@ class AddRoles extends Migrador
      */
     public function up()
     {
-        $sql = "INSERT INTO roles (descripcion) VALUES ('admin'), ('visitor'), ('superadmin'), ('redact')";
+        $sql = "INSERT INTO roles (descripcion) VALUES ('public'), ('admin'), ('super admin') ";
         $this->run($sql);
     }
 

@@ -18,8 +18,8 @@ class Comments extends Migrador
             `updated_at` datetime DEFAULT NULL,
             `is_active` int(1) NOT NULL default 1,
             CONSTRAINT PK_COMMENT Primary Key(id),
-            CONSTRAINT FK_COMMENT_USER FOREIGN KEY (id_user) REFERENCES USERS (id),
-            CONSTRAINT FK_COMMENT_POST FOREIGN KEY (id_post) REFERENCES POST (id)
+            CONSTRAINT FK_COMMENT_USER FOREIGN KEY (id_user) REFERENCES USERS (id) ON DELETE CASCADE,
+            CONSTRAINT FK_COMMENT_POST FOREIGN KEY (id_post) REFERENCES POSTS (id) ON DELETE CASCADE
             );";
         $this->run($sql);
     }

@@ -8,9 +8,9 @@ use App\Interfaces\ISerializable;
 
 interface IDAO
 {
-    static function crear(ISerializable $serializable): int;
+    static function crear(ISerializable $serializable): ?array;
     static function listar(): ?array;
-    static function modificar(ISerializable $serializable): int;
-    static function borrar(string|int $id): int;
+    static function modificar(ISerializable $serializable): ?array;
+    static function borrar(string|int $id): ?array;
     static function buscarUno(string|int $id): false|array;
 }

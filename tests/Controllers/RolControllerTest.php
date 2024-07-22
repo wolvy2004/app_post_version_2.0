@@ -37,6 +37,6 @@ class RolControllerTest extends TestCase
     {
         $sql = 'SELECT MAX(id) id from Roles';
         $max = DBConect::read($sql);
-        return $max[0]['id'];
+        return $max['id'];
     }
 }

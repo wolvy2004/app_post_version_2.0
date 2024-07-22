@@ -10,12 +10,15 @@ use App\Interfaces\Iserializable;
 
 abstract class ModelBase implements ISerializable
 {
-    public function __construct(private ?int $id, private string|DateTime $created_at = "now", private string|DateTime|null $updated_at = "", private int $is_active = 1)
-
-    {
-        $this->id = $id ?? 0;
+    public function __construct(
+        private ?int $id = 0,
+        private string|DateTime $created_at = "now",
+        private string|DateTime|null $updated_at = "",
+        private int $is_active = 1
+    ) {
+        $this->id = $id;
         $this->created_at = $created_at ?? new DateTime($created_at);
-        $this->updated_at = $updated_at ?? new DateTime($updated_at);
+        $this->updated_at = $updated_at ?? new DateTime();
         $this->is_active = $is_active;
     }
 

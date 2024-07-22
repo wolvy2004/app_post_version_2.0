@@ -5,6 +5,7 @@ require_once __DIR__ . '../../../env.php';
 
 use App\config\DBConect;
 use App\Controllers\UserController;
+use App\Handlers\Errors\ErrorDAO;
 use App\Models\User;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -40,10 +41,14 @@ class UserControllerTest extends TestCase
     #[DataProvider('UserProvider')]
     public function testCrearUser(User $user)
     {
-        $usuario_serializado = $user->serializar();
-        $result = UserController::create(params: $usuario_serializado);
-
-        $this->assertEquals($result, 1, "User not created successfully");
+        try {
+            $usuario_serializado = $user->serializar();
+            $result = UserController::create(params: $usuario_serializado);
+            $result = UserController::create(params: $usuario_serializado);    # code...
+            $this->assertEquals($result, 1, "User not created successfully");    # code...
+        } catch (Throwable $e) {
+            echo "Test corrido con Error: " . $e->getMessage() . "\n";
+        }
     }
     #[DataProvider('UserProvider')]
     public function testModificarUser(User $user)

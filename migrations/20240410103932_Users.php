@@ -19,7 +19,8 @@ class Users extends Migrador
         `username`  varchar(100) not null unique,
         `email` varchar(255) not null unique,
         `password` varchar(255) not null,
-        `id_rol` int(11) NOT NULL,
+        `id_rol` int(11) NOT NULL default 1,
+        `picture_profile` varchar(100) default 'default_picture.jpg',
         CONSTRAINT PK_USER Primary Key(id)
         );";
         $this->run($sql);

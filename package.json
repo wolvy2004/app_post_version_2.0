@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "dayjs": "^1.11.11",
+    "view": "^1.1.1",
+    "vue": "^3.4.27",
+    "vuetify": "^3.6.10"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "dev": "concurrently  \"mysqld\" \"composer run dev\" \"cd views && npm run dev\"",
+    "vue-dev": "vue-cli-service serve"
+  }
+}

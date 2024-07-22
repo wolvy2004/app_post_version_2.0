@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Interfaces;
 
-/** Interface para los controladores, deben implementar los metodos basicos */
+/** ?arrayerface para los controladores, deben implementar los metodos basicos */
 interface IController
 {
     /** @var params $params*/
-    static function create(array $params): int;
+    static function create(array $params): ?array;
     /** @return Array */
     static function read(): ?array;
     /** @return array mixed[] */
-    static function destroy(int $id): int;
-    static function update(array $register): int;
-    static function findOne(string|int $id): ?array;
+    static function destroy(int $id): ?array;
+    static function update(array $register): ?array;
+    static function findOne(string|int $id): false|array;
 }

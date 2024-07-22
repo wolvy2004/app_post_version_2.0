@@ -15,19 +15,25 @@ use App\helpers\Create_JWT;
 
 class User extends Model
 {
-    private string $JWT;
+    private  $JWT;
+    private  $email;
+    private  $password;
+    private  $username;
+    private Rol $rol;
+    private $picture_profile;
     /** Create Secure Password */
 
     /** Validate password function @return bool */
     public function __construct(
-        ?int $id,
-        string $created_at,
-        ?string $updated_at,
-        int $is_active,
-        private string $email,
-        private string $password,
-        private string $username,
-        private Rol $rol,
+        string $email,
+        string $password,
+        string $username,
+        Rol $rol,
+        string $picture_profile,
+        int $id = 0,
+        string $created_at = "now",
+        string $updated_at = "",
+        int $is_active = 1,
 
     ) {
         parent::__construct(
@@ -35,11 +41,13 @@ class User extends Model
             created_at: $created_at,
             updated_at: $updated_at,
             is_active: $is_active
+
         );
         $this->username = $username;
         $this->password = Password::crear($password);
         $this->email = $email;
         $this->rol = $rol;
+        $this->picture_profile = $picture_profile;
     }
 
 
@@ -58,14 +66,15 @@ class User extends Model
 
 
         return new Self(
-            id: $serializable['id'],
-            is_active: $serializable['is_active'],
+            id: (int)$serializable['id'],
+            is_active: $serializable['is_active'] ?? 1,
             created_at: $serializable['created_at'],
-            updated_at: $serializable['updated_at'],
+            updated_at: $serializable['updated_at'] ?? "",
             username: $serializable['username'],
             password: $serializable['password'],
             email: $serializable['email'],
             rol: Rol::deserializar($serializable['rol']),
+            picture_profile: $serializable['picture_profile']
 
         );
     }
@@ -107,5 +116,13 @@ class User extends Model
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+    public function getPicture(): string
+    {
+        return $this->picture_profile;
+    }
+    public function setPicture($picture)
+    {
+        $this->picture_profile = $picture;
     }
 }

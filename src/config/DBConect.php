@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\config;
 
+
+use Exception;
 use PDO;
 use PDOException;
 use PDOStatement;
+use Throwable;
 
 class DBConect
 {
@@ -17,7 +20,7 @@ class DBConect
 
         try {
 
-            $host = "localhost";
+            $host = "127.0.0.1";
             $db = $_ENV["DB_NAME"];
             $user = $_ENV["DB_USER"];
             $pass = $_ENV["DB_PASS"];
@@ -31,13 +34,31 @@ class DBConect
     // metodo para lectura de registros
     static function read(string $sql, array $params = []): false|array
     {
-        $dbh = self::conectarDB();
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute($params);
-        // cerramos la conexion
 
-        return $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
+        try {
+
+            $dbh = self::conectarDB();
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute($params);
+            // cerramos la conexion
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            if (count($resultados) === 1) {
+                return $resultados[0];
+            }
+        } catch (Throwable $e) {
+
+            return [
+                'error' => [
+                    'code' => $e->getCode(),
+                    "mensaje" => $e->getMessage()
+                ]
+
+            ];
+        }
+
+
+        return $resultados;
     }
     static function write(string $sql, array $params = []): int
     {

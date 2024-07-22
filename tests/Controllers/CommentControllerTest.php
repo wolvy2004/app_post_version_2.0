@@ -101,6 +101,6 @@ class CommentControllerTest extends TestCase
     {
         $sql = 'SELECT MAX(id) id from comments';
         $max = DBConect::read($sql);
-        return $max[0]['id'];
+        return $max['id'];
     }
 }
